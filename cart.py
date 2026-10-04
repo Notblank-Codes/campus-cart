@@ -10,6 +10,8 @@ def add_to_cart(cart, inventory, item_id, quantity):
     """Add an item to the cart if it exists and has enough stock."""
     if item_id not in inventory:
         return False
+    if quantity <= 0:
+        return False
     if quantity > inventory[item_id]["stock"]:
         return False
     subtotal = inventory[item_id]["price"] * quantity

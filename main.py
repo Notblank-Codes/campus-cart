@@ -6,7 +6,7 @@ Author: Luqman
 
 from inventory import display_catalog, verify_stock, update_stock, calc_price_quote
 from cart import add_to_cart, calculate_subtotal, stream_receipt_lines
-from logger import log_transaction, get_audit_summary 
+from logger import log_transaction, get_audit_summary, transaction_logs
 
 # Shared data for the whole app
 inventory = {
@@ -92,6 +92,9 @@ def main():
             checkout(cart, inventory)
 
         elif choice == "5":
+            summary = get_audit_summary(transaction_logs)
+            print(f"\nSession summary: {summary['total_transactions']} transactions "
+                  f"({summary['completed']} completed, {summary['failed']} failed)")
             print("Goodbye!")
             break
 
